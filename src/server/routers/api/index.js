@@ -2,6 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
+// Version 1
 router.use("/v1", require("./v1"));
 
 /**
@@ -12,7 +13,7 @@ router.use((req, res, next) => {
 });
 
 /**
- * Custom error handler (API
+ * API error handler
  */
 router.use((err, req, res, next) => {
     const development = process.env.NODE_ENV === "development";

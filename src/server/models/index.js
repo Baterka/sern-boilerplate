@@ -1,6 +1,3 @@
-/**
- * @author David Bubeník (davidbubenik.cz)
- */
 const fs = require("fs-extra");
 const path = require("path");
 const Sequelize = require("sequelize");

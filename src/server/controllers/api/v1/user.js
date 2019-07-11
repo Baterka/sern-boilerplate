@@ -6,7 +6,9 @@ exports.layout = async (req, res, next) => {
 };
 
 exports.index = async (req, res) => {
-    res.jsend.success({
-        username: os.userInfo().username
-    });
+    setTimeout(() => {
+        res.jsend.success({
+            username: os.userInfo().username
+        })
+    }, 1000); // Fake response time
 };

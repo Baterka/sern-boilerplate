@@ -1,14 +1,7 @@
-/**
- * @author David Bubeník
- * Description: Custom command line logger with message levels
- */
-
 // WebStorm Console colors fix
 process.stdout.isTTY = true;
 
 const colors = require("colors");
-
-const config = require("../config");
 
 let prefix = "";
 
