@@ -1,20 +1,16 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-
-import store from './store';
 
 import './app.scss';
 
-import ReactImage from './assets/react.png';
-
-import Username from "./components/Username";
+import Username from './components/Username';
+import Image from './components/Image';
 
 function App() {
     return (
-        <Provider store={store}>
+        <div>
             <Username/>
-            <img src={ReactImage} alt="react"/>
-        </Provider>
+            <Image/>
+        </div>
     );
 }
 

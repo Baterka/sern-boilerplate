@@ -1,7 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import {getUsername} from '../actions/general';
+import { getUsername } from '../actions/general';
 
 class Username extends React.Component {
 
@@ -10,17 +11,31 @@ class Username extends React.Component {
     }
 
     render() {
-        const {username} = this.props;
+        const {username, error} = this.props;
         return (
-            <h1>
-                {username ? `Hello ${username}!` : `Loading...`}
-            </h1>
+            <div>
+                <h1>
+                    {username ? `Hello ${username}!` : `Loading...`}
+                </h1>
+                <p className="error">{error}</p>
+            </div>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-    username: state.general.username
+const mapStateToProps = state => ({
+    username: state.user.username,
+    error: state.user.error
 });
 
-export default connect(mapStateToProps, {getUsername})(Username)
+const mapDispatchToProps = {
+    getUsername: getUsername,
+};
+
+Username.propTypes = {
+    username: PropTypes.string,
+    error: PropTypes.string,
+    getUsername: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Username);

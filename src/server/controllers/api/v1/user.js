@@ -1,4 +1,4 @@
-const os = require("os");
+const os = require('os');
 
 exports.layout = async (req, res, next) => {
     // For some data same in all router of this endpoint
@@ -7,8 +7,14 @@ exports.layout = async (req, res, next) => {
 
 exports.index = async (req, res) => {
     setTimeout(() => {
-        res.jsend.success({
-            username: os.userInfo().username
-        })
+        if (Math.random() > 0.5) {
+            res.jsend.success({
+                username: os.userInfo().username
+            })
+        } else {
+            res.jsend.fail({
+                message: 'Try again later'
+            })
+        }
     }, 1000); // Fake response time
 };

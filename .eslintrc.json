@@ -1,15 +1,36 @@
 {
-  "parser": "babel-eslint",
-  "extends": [
-    "airbnb"
-  ],
   "env": {
     "browser": true,
+    "es6": true,
     "node": true
   },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
   "rules": {
-    "no-console": "off",
-    "comma-dangle": "off",
-    "react/jsx-filename-extension": "off"
+    "one-var": [
+      "error",
+      "never"
+    ],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "spaced-comment": [
+      "error",
+      "always"
+    ]
   }
 }

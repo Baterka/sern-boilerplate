@@ -1,9 +1,44 @@
-h1{
-    color: white;
+h1 {
+  color: white;
 }
 
 body {
-    margin-top: 25px;
-    text-align: center;
-    background-color: #222222;
+  margin-top: 25px;
+  text-align: center;
+  background-color: #222222;
+}
+
+.spin {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+  animation-play-state: running;
+
+  &.paused {
+    animation-play-state: paused;
+  }
+}
+
+.error{
+  color: red;
+  min-height: 20px;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

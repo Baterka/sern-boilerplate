@@ -1,1 +1,3 @@
 export const GET_USERNAME = 'GET_USERNAME';
+export const USERNAME_RECEIVED = 'USERNAME_RECEIVED';
+export const SHOW_ERROR = 'SHOW_ERROR';
