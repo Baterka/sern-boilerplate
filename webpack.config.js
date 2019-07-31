@@ -1,4 +1,4 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
@@ -7,10 +7,10 @@ const outputPath = path.join(__dirname, 'dist');
 module.exports = (env, argv) => {
     const isDevelopment = argv.mode !== 'production';
     return {
-        entry: "./src/client/index.js",
+        entry: './src/client/index.js',
         output: {
             path: outputPath,
-            filename: "[name].js"
+            filename: '[name].js'
         },
         module: {
             rules: [
@@ -72,7 +72,7 @@ module.exports = (env, argv) => {
         plugins: [
             new CleanWebpackPlugin([outputPath]),
             new HtmlWebPackPlugin({
-                template: "./public/index.html"
+                template: './public/index.html'
             }),
             new MiniCssExtractPlugin({
                 filename: isDevelopment ? '[name].css' : '[name].[hash].css',
