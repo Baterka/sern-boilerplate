@@ -1,31 +1,18 @@
 const log = require('../utils/log');
 
-const { errors: language } = require('../data/localization/cs/server');
-
 exports.error = (err, req, res, next) => {
-  if (!res.locals.baseURL) {
-    res.locals = {
-      ...res.locals,
-      baseURL: global.config.website.url,
-    };
-  }
+    const status = err.status || 500;
 
-  const status = err.status || 500;
+    if (status >= 500)
+        log.error(err);
 
-  if (status >= 500) {
-    log.error(err);
-  }
+    const devError = `
+      <h1>${status}</h1>
+      <h4>Message:</h4>
+      <p>${err.message}</p>
+      <h4>Stack:</h4>
+      <p>${err.stack}</p>`;
 
-  res.locals.error = {
-    status,
-    title: language[status] ? language[status].title : err.message,
-    message: language[status] ? language[status].message : '',
-    error: process.env.NODE_ENV === 'development' ? err : {},
-  };
-
-  // Render the error page
-  res.status(status);
-  res.render('error', {
-    layout: false
-  });
+    // Render the error page
+    res.status(status).send(process.env.NODE_ENV === 'development' ? devError : '');
 };

@@ -4,6 +4,7 @@
  */
 
 const createError = require('http-errors');
+const log = require('./log');
 
 
 /**
@@ -36,9 +37,8 @@ exports.createErrorMiddleware = (req, res, next) => {
       }
     }
 
-    if (status >= 500) {
+    if (status >= 500)
       log.error(err);
-    }
 
     return createError(status, process.env.NODE_ENV === 'development' ? (err || msg) : undefined, props);
   };

@@ -2,8 +2,6 @@ const http = require('http');
 const log = require('./log');
 const config = require('../config');
 
-const bind = port => typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
-
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -11,52 +9,13 @@ const bind = port => typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
-  if (isNaN(port)) {
+  if (isNaN(port))
     return val;
-  }
 
-  if (port >= 0) {
+  if (port >= 0)
     return port;
-  }
 
   return false;
-};
-
-/**
- * Event listener for HTTP server "error" event.
- */
-
-const onError = err => {
-  if (err.syscall !== 'listen') {
-    throw error;
-  }
-
-  let bind = bind(port);
-
-  switch (err.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-};
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-const onListening = server => {
-  let addr = server.address();
-  let bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-
-  log.info('Listening on ' + bind);
-  log.info('Running in ' + process.env.NODE_ENV + ' mode.');
 };
 
 exports.launch = async (app) => {
@@ -77,11 +36,37 @@ exports.launch = async (app) => {
   server.listen(port);
 
   /**
-   * Listen for events
+   * Event listener for HTTP server "error" event.
    */
 
-  server.on('error', onError);
-  server.on('listening', () => onListening(server));
+  server.on('error', err => {
+    if (err.syscall !== 'listen')
+      throw err;
+
+    switch (err.code) {
+      case 'EACCES':
+        log.error('Port ' + port + ' requires elevated privileges');
+        process.exit(1);
+        break;
+      case 'EADDRINUSE':
+        log.error('Port ' + port + ' is already in use');
+        process.exit(1);
+        break;
+      default:
+        throw err;
+    }
+  });
+
+  /**
+   * Event listener for HTTP server "listening" event.
+   */
+
+  server.on('listening', () => {
+      let addr = server.address();
+
+      log.info('Listening on port ' + addr.port);
+      log.info('Running in ' + process.env.NODE_ENV + ' mode.');
+  });
 
   return server;
 };

@@ -28,7 +28,8 @@
     "redux": "^4.0.3",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.0.5",
-    "sequelize": "^5.10.0"
+    "sequelize": "^5.10.0",
+    "http-errors": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

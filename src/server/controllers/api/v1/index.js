@@ -6,7 +6,7 @@
  */
 exports.index = async (req, res) => {
     res.jsend.success({
-        message: "API root",
+        message: 'API root',
         version: 1
     });
 };
